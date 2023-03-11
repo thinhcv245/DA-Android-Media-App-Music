@@ -6,15 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".PlayMusicActivity"
     android:background="@drawable/gradient_bg_primary">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/playmusic_guiline_top10"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+<!--    <include-->
+<!--        layout="@layout/header"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
 
+    <ImageView
+        android:id="@+id/playmusic_imageView_iconDown"
+        android:src="@drawable/icon_down"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="22dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/playmusic_cover_title"
+        app:layout_constraintBottom_toBottomOf="@id/playmusic_guiline_top10"/>
+    <LinearLayout
+        android:id="@+id/playmusic_cover_title"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconDown"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconThreePointVertical"
+        app:layout_constraintBottom_toBottomOf="@id/playmusic_guiline_top10">
+        <TextView
+            android:text="PHÁT TỪ"
+            android:textColor="#ffffff"
+            android:alpha=".6"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/playmusic_textView_source"
+            android:text="Tìm kiếm"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/playmusic_imageView_iconThreePointVertical"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginRight="22dp"
+        android:src="@drawable/icon_three_point_vertical"
+        app:layout_constraintLeft_toRightOf="@id/playmusic_cover_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/playmusic_guiline_top10"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/playmusic_guiline_bottom80"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="512dp" />
 
     <ImageView
         android:id="@+id/playmusic_imageView_rotate"
@@ -31,9 +88,9 @@
     <ImageView
         android:id="@+id/playmusic_imageView_iconShare"
         android:src="@drawable/icon_share"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         app:layout_constraintVertical_bias=".3"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -68,9 +125,9 @@
     <ImageView
         android:id="@+id/playmusic_imageView_iconHeart"
         android:src="@drawable/icon_heart_empty"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintVertical_bias=".3"
         app:layout_constraintTop_toBottomOf="@id/playmusic_imageView_rotate"
@@ -110,36 +167,71 @@
         app:layout_constraintRight_toRightOf="@id/playmusic_seekbar"
         app:layout_constraintLeft_toRightOf="@id/playmusic_textView_timeStart"/>
     <ImageView
-        android:id="@+id/playmusic_imageView_iconPrevious"
-        android:src="@drawable/icon_previous"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintVertical_bias=".9"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/playmusic_imageView_iconRandom"
+        android:src="@drawable/icon_random"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="6dp"
+        android:alpha=".7"
+        app:layout_constraintTop_toTopOf="@id/playmusic_guiline_bottom80"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconPlayOrPause"/>
-    <ImageView
-        android:id="@+id/playmusic_imageView_iconPlayOrPause"
-        android:src="@drawable/icon_play"
-        android:background="@drawable/circle_of_icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:layout_constraintVertical_bias=".9"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/playmusic_cover_control"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/playmusic_cover_control"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent=".5"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/playmusic_guiline_bottom80"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconPrevious"
-        app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconNext"/>
+        app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconRandom"
+        app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconRepeat">
+        <ImageView
+            android:id="@+id/playmusic_imageView_iconPrevious"
+            android:src="@drawable/icon_previous"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintVertical_bias=".9"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconPlayOrPause"/>
+        <ImageView
+            android:id="@+id/playmusic_imageView_iconPlayOrPause"
+            android:src="@drawable/icon_play"
+            android:background="@drawable/circle_of_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintVertical_bias=".9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconPrevious"
+            app:layout_constraintRight_toLeftOf="@id/playmusic_imageView_iconNext"/>
+        <ImageView
+            android:id="@+id/playmusic_imageView_iconNext"
+            android:src="@drawable/icon_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintVertical_bias=".9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconPlayOrPause"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <ImageView
-        android:id="@+id/playmusic_imageView_iconNext"
-        android:src="@drawable/icon_next"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintVertical_bias=".9"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/playmusic_imageView_iconRepeat"
+        android:src="@drawable/icon_repeat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:alpha=".7"
+        app:layout_constraintTop_toTopOf="@id/playmusic_guiline_bottom80"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/playmusic_imageView_iconPlayOrPause"
+        app:layout_constraintLeft_toRightOf="@id/playmusic_cover_control"
         app:layout_constraintRight_toRightOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
