@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_marginRight="20dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+        <ImageView
+            android:id="@+id/itemAlbum_imageView_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/itemAlbum_textView_descript"
+        android:text="Top 100 Bài Hát Nhạc Trẻ Hay nhất"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

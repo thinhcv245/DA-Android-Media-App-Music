@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalActivity">
-    <ImageView
-        android:id="@+id/img"
+    tools:context=".PlayListActivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlist_recyclerView_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
