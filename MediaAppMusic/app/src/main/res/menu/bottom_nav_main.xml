@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/main_menu_home" android:title="Trang Chủ" android:icon="@drawable/baseline_home_24"/>
+    <item android:id="@+id/main_menu_top100" android:title="Top 100" android:icon="@drawable/baseline_stars_24"/>
+</menu>

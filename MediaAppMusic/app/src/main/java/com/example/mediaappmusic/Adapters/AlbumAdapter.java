@@ -35,11 +35,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ImageView img       = holder.itemView.findViewById(R.id.itemAlbum_imageView_img);
-        TextView descript   = holder.itemView.findViewById(R.id.itemAlbum_textView_descript);
         Album item = items.get(position);
-        img.setImageDrawable(Utilities.LoadImageFromWebOperations(item.getThumbnail()));
-        descript.setText(item.getTitle());
+        holder.img.setImageDrawable(Utilities.LoadImageFromWebOperations(item.getThumbnail()));
+        holder.descript.setText(item.getTitle());
     }
 
     @Override
@@ -48,8 +46,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView img;
+        TextView descript;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            img       = itemView.findViewById(R.id.itemAlbum_imageView_img);
+            descript   = itemView.findViewById(R.id.itemAlbum_textView_descript);
         }
     }
 }

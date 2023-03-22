@@ -4,15 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#5D7B6F"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity">
 
-    <ImageView
-        android:minWidth="200dp"
-        android:minHeight="200dp"
-        android:src="@mipmap/ic_music_foreground"
-        android:layout_width="wrap_content"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/main_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_bottomNavigationView"
+        android:background="#ffffff"
+        app:menu="@menu/bottom_nav_main"
+        app:itemIconTint="@drawable/primary_nav_main"
+        app:itemTextColor="@drawable/primary_nav_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 </LinearLayout>

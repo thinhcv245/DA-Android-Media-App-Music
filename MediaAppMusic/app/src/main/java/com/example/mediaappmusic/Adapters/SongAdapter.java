@@ -36,12 +36,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Song item = items.get(position);
-        ImageView img       = holder.itemView.findViewById(R.id.itemSong_imageView_img);
-        TextView nameSong   = holder.itemView.findViewById(R.id.itemSong_textView_nameSong);
-        TextView nameSing   = holder.itemView.findViewById(R.id.itemSong_textView_nameSing);
-        img.setImageDrawable(Utilities.LoadImageFromWebOperations("https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_jpeg/cover/0/9/5/4/09542fd83e019d4734587f836bc9bbc0.jpg"));
-        nameSong.setText(item.getTitle());
-        nameSing.setText(item.getArtistsNames());
+        holder.img.setImageDrawable(Utilities.LoadImageFromWebOperations("https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_jpeg/cover/0/9/5/4/09542fd83e019d4734587f836bc9bbc0.jpg"));
+        holder.nameSong.setText(item.getTitle());
+        holder.nameSing.setText(item.getArtistsNames());
+        holder.encodeId = item.getEncodeId();
     }
 
     @Override
@@ -49,10 +47,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private String encodeId;
+        ImageView img;
+        TextView nameSong, nameSing;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ImageView img       = itemView.findViewById(R.id.itemSong_imageView_img);
+            TextView nameSong   = itemView.findViewById(R.id.itemSong_textView_nameSong);
+            TextView nameSing   = itemView.findViewById(R.id.itemSong_textView_nameSing);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }
