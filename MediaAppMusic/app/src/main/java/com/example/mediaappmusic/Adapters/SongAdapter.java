@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mediaappmusic.DTO.SongDTO;
 import com.example.mediaappmusic.Helpers.Utilities;
-import com.example.mediaappmusic.Models.Song;
 import com.example.mediaappmusic.R;
 
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Song> items;
+    ArrayList<SongDTO> items;
 
-    public SongAdapter(Context context, ArrayList<Song> items) {
+    public SongAdapter(Context context, ArrayList<SongDTO> items) {
         this.context = context;
         this.items = items;
     }
@@ -35,7 +35,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Song item = items.get(position);
+        SongDTO item = items.get(position);
         holder.img.setImageDrawable(Utilities.LoadImageFromWebOperations("https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_jpeg/cover/0/9/5/4/09542fd83e019d4734587f836bc9bbc0.jpg"));
         holder.nameSong.setText(item.getTitle());
         holder.nameSing.setText(item.getArtistsNames());

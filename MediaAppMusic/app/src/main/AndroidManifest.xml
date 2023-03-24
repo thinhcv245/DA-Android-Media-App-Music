@@ -15,39 +15,41 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.SplashScreenActivity"
+            android:name=".Activities.AlbumOrPlayListActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".Activities.OnePlayListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Activities.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Media App Music">
 
         </activity>
-        <activity
-            android:name=".Top100Activity"
-            android:exported="true"></activity>
         <activity
             android:name=".PlayListActivity"
             android:exported="true" />
         <activity
             android:name=".PlayMusicActivity"
-            android:exported="true">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".PersonalActivity"
             android:exported="true" />

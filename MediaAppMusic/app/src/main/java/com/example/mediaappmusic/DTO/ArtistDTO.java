@@ -1,6 +1,8 @@
-package com.example.mediaappmusic.Models;
+package com.example.mediaappmusic.DTO;
 
-public class Artist {
+import java.io.Serializable;
+
+public class ArtistDTO implements Serializable {
     private String id;
     private String name;
 
@@ -8,7 +10,7 @@ public class Artist {
     private String thumbnail;
     private String playlistId;
 
-    public Artist(String id, String name, String thumbnail, String playlistId) {
+    public ArtistDTO(String id, String name, String thumbnail, String playlistId) {
         this.id = id;
         this.name = name;
         this.thumbnail = thumbnail;

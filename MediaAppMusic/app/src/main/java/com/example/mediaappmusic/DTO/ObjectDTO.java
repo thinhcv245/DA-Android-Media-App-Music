@@ -1,12 +1,13 @@
-package com.example.mediaappmusic.Models;
+package com.example.mediaappmusic.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PlayList {
+public class ObjectDTO implements Serializable {
     private String title;
-    private ArrayList<Album> items;
+    private ArrayList<AlbumDTO> items;
 
-    public PlayList(String title, ArrayList<Album> items) {
+    public ObjectDTO(String title, ArrayList<AlbumDTO> items) {
         this.title = title;
         this.items = items;
     }
@@ -19,11 +20,11 @@ public class PlayList {
         this.title = title;
     }
 
-    public ArrayList<Album> getItems() {
+    public ArrayList<AlbumDTO> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Album> items) {
+    public void setItems(ArrayList<AlbumDTO> items) {
         this.items = items;
     }
 }

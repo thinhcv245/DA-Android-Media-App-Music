@@ -1,15 +1,7 @@
-package com.example.mediaappmusic.Fragments;
+package com.example.mediaappmusic;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mediaappmusic.APIs.IAPIData;
 import com.example.mediaappmusic.Adapters.AlbumAdapter;
-import com.example.mediaappmusic.Adapters.ObjectDTOAdapter;
 import com.example.mediaappmusic.DTO.ObjectDTO;
+import com.example.mediaappmusic.Fragments.HomeFragment;
 import com.example.mediaappmusic.Helpers.Utilities;
-import com.example.mediaappmusic.R;
 
 import java.util.ArrayList;
 
@@ -37,13 +32,12 @@ public class Top100Fragment extends Fragment {
     ArrayList<TextView> textViews;
     LinearLayout linearLayoutLoadAPI;
     ArrayList<ObjectDTO> objectDTOS;
-    RecyclerView recyclerViewObjectDTO;
     public Top100Fragment() {
         // Required empty public constructor
     }
 
-    public static Top100Fragment newInstance() {
-        Top100Fragment fragment = new Top100Fragment();
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
         return fragment;
     }
 
@@ -58,26 +52,25 @@ public class Top100Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_top100, container, false);
-//        recyclerViews       = new ArrayList<>();
-//        textViews           = new ArrayList<>();
+        recyclerViews       = new ArrayList<>();
+        textViews           = new ArrayList<>();
 
-        imageViewBanner         = layout.findViewById(R.id.top100Fragment_imageView_banner);
-        recyclerViewObjectDTO   = layout.findViewById(R.id.top100Fragment_recyclerView);
-        linearLayoutLoadAPI     = layout.findViewById(R.id.top100Fragment_linearLayout_loadAPI);
+        imageViewBanner     = layout.findViewById(R.id.top100Fragment_imageView_banner);
+        linearLayoutLoadAPI  = layout.findViewById(R.id.top100Fragment_linearLayout_loadAPI);
         linearLayoutLoadAPI.setVisibility(View.GONE);
 
-//        for(int i = 0; i < 6; i++) {
-//            try{
-//                int id = getResources().getIdentifier("top100Fragment_recyclerView_recycle" + i, "id", getContext().getPackageName());
-//                System.out.println("ID: " + id);
-//                recyclerViews.add(layout.findViewById(id));
-//                int idText = getResources().getIdentifier("top100Fragment_textView_title" + i, "id",getContext().getPackageName());
-//                textViews.add(layout.findViewById(idText));
-//            }
-//            catch (Exception e) {
-//                System.out.println("Error " + i);
-//            }
-//        }
+        for(int i = 0; i < 6; i++) {
+            try{
+                int id = getResources().getIdentifier("top100Fragment_recyclerView_recycle" + i, "id", getContext().getPackageName());
+                System.out.println("ID: " + id);
+                recyclerViews.add(layout.findViewById(id));
+                int idText = getResources().getIdentifier("top100Fragment_textView_title" + i, "id",getContext().getPackageName());
+                textViews.add(layout.findViewById(idText));
+            }
+            catch (Exception e) {
+                System.out.println("Error " + i);
+            }
+        }
 
         Drawable drawable = Utilities.LoadImageFromAssets(getContext(), "banner.jpg");
         if(drawable != null) {
@@ -89,26 +82,23 @@ public class Top100Fragment extends Fragment {
     }
 
     private void pushDataToView(ArrayList<ObjectDTO> objectDTOS) {
-        ObjectDTOAdapter objectDTOAdapter = new ObjectDTOAdapter(getContext(), objectDTOS);
-        recyclerViewObjectDTO.setAdapter(objectDTOAdapter);
-        recyclerViewObjectDTO.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        for(int i = 0; i < objectDTOS.size(); i++) {
-//            AlbumAdapter albumAdapter = new AlbumAdapter(getContext(), objectDTOS.get(i).getItems());
-//            RecyclerView recyclerView = recyclerViews.get(i);
-//            if(recyclerView != null) {
-//                recyclerView.setAdapter(albumAdapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//            }
-//            TextView textView = textViews.get(i);
-//            textView.setText(objectDTOS.get(i).getTitle());
-//        }
+        for(int i = 0; i < objectDTOS.size(); i++) {
+            AlbumAdapter albumAdapter = new AlbumAdapter(getContext(), objectDTOS.get(i).getItems());
+            RecyclerView recyclerView = recyclerViews.get(i);
+            if(recyclerView != null) {
+                recyclerView.setAdapter(albumAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            }
+            TextView textView = textViews.get(i);
+            textView.setText(objectDTOS.get(i).getTitle());
+        }
     }
     private void CallPlayListTop100() {
         linearLayoutLoadAPI.setVisibility(View.VISIBLE);
         IAPIData.iApiService.getPlayListTop100().enqueue(new Callback<ArrayList<ObjectDTO>>() {
             @Override
             public void onResponse(Call<ArrayList<ObjectDTO>> call, Response<ArrayList<ObjectDTO>> response) {
+
                 if (response.isSuccessful()) {
                     objectDTOS = response.body();
                     pushDataToView(objectDTOS);
@@ -125,7 +115,6 @@ public class Top100Fragment extends Fragment {
 //                        textView.setText(objectDTOS.get(i).getTitle());
 //                    }
                 }
-                linearLayoutLoadAPI.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ArrayList<ObjectDTO>> call, Throwable t) {
@@ -136,17 +125,16 @@ public class Top100Fragment extends Fragment {
                             objectDTOS = response.body();
                             pushDataToView(objectDTOS);
                         }
-                        linearLayoutLoadAPI.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<ObjectDTO>> call, Throwable t) {
-                        linearLayoutLoadAPI.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
                     }
                 });
 //                Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
             }
         });
+        linearLayoutLoadAPI.setVisibility(View.GONE);
     }
 }

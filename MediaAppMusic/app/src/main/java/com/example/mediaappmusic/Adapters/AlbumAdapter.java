@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaappmusic.Helpers.Utilities;
-import com.example.mediaappmusic.Models.Album;
-import com.example.mediaappmusic.Models.PlayList;
+import com.example.mediaappmusic.DTO.AlbumDTO;
 import com.example.mediaappmusic.R;
 
 import java.util.ArrayList;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     Context context;
-    ArrayList<Album> items;
+    ArrayList<AlbumDTO> items;
 
-    public AlbumAdapter(Context context, ArrayList<Album> items) {
+    public AlbumAdapter(Context context, ArrayList<AlbumDTO> items) {
         this.context = context;
         this.items = items;
     }
@@ -35,7 +34,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Album item = items.get(position);
+        AlbumDTO item = items.get(position);
         holder.img.setImageDrawable(Utilities.LoadImageFromWebOperations(item.getThumbnail()));
         holder.descript.setText(item.getTitle());
     }

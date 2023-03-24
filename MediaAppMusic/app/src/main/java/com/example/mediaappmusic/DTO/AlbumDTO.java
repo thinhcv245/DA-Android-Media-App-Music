@@ -1,16 +1,35 @@
-package com.example.mediaappmusic.Models;
+package com.example.mediaappmusic.DTO;
 
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
-public class Album {
+public class AlbumDTO implements Serializable {
     private String encodeId;
     private String title;
     private String thumbnail;
     private String sortDescription;
     private String artistsNames;
-    private ArrayList<Artist> artists;
+    private ArrayList<ArtistDTO> artists;
 
-    public Album(String encodeId, String title, String thumbnail, String sortDescription, String artistsNames, ArrayList<Artist> artists) {
+    public SongInAlbum getSong() {
+        return song;
+    }
+
+    public void setSong(SongInAlbum song) {
+        this.song = song;
+    }
+
+    private SongInAlbum song;
+
+    public AlbumDTO(String encodeId, String title, String thumbnail, String sortDescription, String artistsNames, ArrayList<ArtistDTO> artists) {
         this.encodeId = encodeId;
         this.title = title;
         this.thumbnail = thumbnail;
@@ -59,11 +78,11 @@ public class Album {
         this.artistsNames = artistsNames;
     }
 
-    public ArrayList<Artist> getArtists() {
+    public ArrayList<ArtistDTO> getArtists() {
         return artists;
     }
 
-    public void setArtists(ArrayList<Artist> artists) {
+    public void setArtists(ArrayList<ArtistDTO> artists) {
         this.artists = artists;
     }
 }

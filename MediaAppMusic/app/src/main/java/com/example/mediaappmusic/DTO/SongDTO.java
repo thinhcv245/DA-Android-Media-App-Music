@@ -1,17 +1,18 @@
-package com.example.mediaappmusic.Models;
+package com.example.mediaappmusic.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Song {
+public class SongDTO implements Serializable {
     private String encodeId;
     private String title;
     private String artistsNames;
 
     //link image
     private String thumbnailM;
-    private ArrayList<Artist> artists;
+    private ArrayList<ArtistDTO> artists;
 
-    public Song(String encodeId, String title, String artistsNames, String thumbnailM, ArrayList<Artist> artists) {
+    public SongDTO(String encodeId, String title, String artistsNames, String thumbnailM, ArrayList<ArtistDTO> artists) {
         this.encodeId = encodeId;
         this.title = title;
         this.artistsNames = artistsNames;
@@ -51,11 +52,11 @@ public class Song {
         this.thumbnailM = thumbnailM;
     }
 
-    public ArrayList<Artist> getArtists() {
+    public ArrayList<ArtistDTO> getArtists() {
         return artists;
     }
 
-    public void setArtists(ArrayList<Artist> artists) {
+    public void setArtists(ArrayList<ArtistDTO> artists) {
         this.artists = artists;
     }
 }

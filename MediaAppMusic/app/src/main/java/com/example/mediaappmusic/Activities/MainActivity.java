@@ -5,19 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.mediaappmusic.Adapters.ViewPagerAdapter;
 import com.example.mediaappmusic.Fragments.HomeFragment;
 import com.example.mediaappmusic.Fragments.Top100Fragment;
-import com.example.mediaappmusic.PersonalActivity;
 import com.example.mediaappmusic.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -75,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void init() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.newInstance("Home"));
-        fragments.add(Top100Fragment.newInstance("Top 100"));
+        fragments.add(HomeFragment.newInstance());
+        fragments.add(Top100Fragment.newInstance());
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(viewPagerAdapter);

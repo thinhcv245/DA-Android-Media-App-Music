@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f20"
     tools:context=".Fragments.HomeFragment">
 
-    <TextView
-        android:id="@+id/homeFragment_textView"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/homeFragment_fragment_headerMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </ScrollView>
 
 </FrameLayout>
