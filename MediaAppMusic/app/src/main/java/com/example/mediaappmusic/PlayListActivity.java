@@ -20,12 +20,12 @@ public class PlayListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_list);
         playList        = findViewById(R.id.playlist_recyclerView_list);
 
-        ArrayList<SongDTO> songArrayList = new ArrayList<>();
-        songArrayList.add(new SongDTO("1","Cuoi-Cung-Thi_Jack.jpg", "Cuối cùng thì", "Jack", null));
-        songArrayList.add(new SongDTO("1","Khuat-Loi_H-Kray.jpg", "Khuất lối", "H-Kay", null));
-        SongAdapter adapter = new SongAdapter(this, songArrayList);
-        playList.setAdapter(adapter);
-        playList.setLayoutManager(new LinearLayoutManager(this));
+//        ArrayList<SongDTO> songArrayList = new ArrayList<>();
+//        songArrayList.add(new SongDTO("1","Cuoi-Cung-Thi_Jack.jpg", "Cuối cùng thì", "Jack", null));
+//        songArrayList.add(new SongDTO("1","Khuat-Loi_H-Kray.jpg", "Khuất lối", "H-Kay", null));
+//        SongAdapter adapter = new SongAdapter(this, songArrayList);
+//        playList.setAdapter(adapter);
+//        playList.setLayoutManager(new LinearLayoutManager(this));
 
 //        ArrayList<ArtistDTO> items = new ArrayList<>();
 //        items.add(new ArtistDTO("ida1", "a1", "a1.jpg", "j"));

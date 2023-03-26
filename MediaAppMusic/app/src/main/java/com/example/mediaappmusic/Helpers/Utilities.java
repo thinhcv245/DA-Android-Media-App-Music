@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ public class Utilities {
             Drawable d = Drawable.createFromStream(is, "src name");
             return d;
         } catch (Exception e) {
+            Log.d("Vô exception: ", "utilities");
             return null;
         }
     }

@@ -2,6 +2,7 @@ package com.example.mediaappmusic.APIs;
 
 import com.example.mediaappmusic.DTO.AlbumDTO;
 import com.example.mediaappmusic.DTO.ObjectDTO;
+import com.example.mediaappmusic.DTO.SongDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -30,4 +31,7 @@ public interface IAPIData {
 
     @GET("getDetailPlaylist/{id}")
     Call<AlbumDTO> getDetailsAlbumOrPlayList(@Path("id") String id);
+
+    @GET("getFullInfo/{id}")
+    Call<SongDTO> getFullInfo(@Path("id") String id);
 }

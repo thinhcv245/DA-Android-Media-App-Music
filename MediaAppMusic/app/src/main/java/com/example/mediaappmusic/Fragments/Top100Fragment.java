@@ -33,8 +33,6 @@ import retrofit2.Response;
 
 public class Top100Fragment extends Fragment {
     ImageView imageViewBanner;
-    ArrayList<RecyclerView> recyclerViews;
-    ArrayList<TextView> textViews;
     LinearLayout linearLayoutLoadAPI;
     ArrayList<ObjectDTO> objectDTOS;
     RecyclerView recyclerViewObjectDTO;
@@ -58,26 +56,11 @@ public class Top100Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_top100, container, false);
-//        recyclerViews       = new ArrayList<>();
-//        textViews           = new ArrayList<>();
 
         imageViewBanner         = layout.findViewById(R.id.top100Fragment_imageView_banner);
         recyclerViewObjectDTO   = layout.findViewById(R.id.top100Fragment_recyclerView);
         linearLayoutLoadAPI     = layout.findViewById(R.id.top100Fragment_linearLayout_loadAPI);
         linearLayoutLoadAPI.setVisibility(View.GONE);
-
-//        for(int i = 0; i < 6; i++) {
-//            try{
-//                int id = getResources().getIdentifier("top100Fragment_recyclerView_recycle" + i, "id", getContext().getPackageName());
-//                System.out.println("ID: " + id);
-//                recyclerViews.add(layout.findViewById(id));
-//                int idText = getResources().getIdentifier("top100Fragment_textView_title" + i, "id",getContext().getPackageName());
-//                textViews.add(layout.findViewById(idText));
-//            }
-//            catch (Exception e) {
-//                System.out.println("Error " + i);
-//            }
-//        }
 
         Drawable drawable = Utilities.LoadImageFromAssets(getContext(), "banner.jpg");
         if(drawable != null) {
@@ -92,17 +75,6 @@ public class Top100Fragment extends Fragment {
         ObjectDTOAdapter objectDTOAdapter = new ObjectDTOAdapter(getContext(), objectDTOS);
         recyclerViewObjectDTO.setAdapter(objectDTOAdapter);
         recyclerViewObjectDTO.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        for(int i = 0; i < objectDTOS.size(); i++) {
-//            AlbumAdapter albumAdapter = new AlbumAdapter(getContext(), objectDTOS.get(i).getItems());
-//            RecyclerView recyclerView = recyclerViews.get(i);
-//            if(recyclerView != null) {
-//                recyclerView.setAdapter(albumAdapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//            }
-//            TextView textView = textViews.get(i);
-//            textView.setText(objectDTOS.get(i).getTitle());
-//        }
     }
     private void CallPlayListTop100() {
         linearLayoutLoadAPI.setVisibility(View.VISIBLE);
@@ -112,18 +84,6 @@ public class Top100Fragment extends Fragment {
                 if (response.isSuccessful()) {
                     objectDTOS = response.body();
                     pushDataToView(objectDTOS);
-//                    for(int i = 0; i < objectDTOS.size(); i++) {
-//                        AlbumAdapter albumAdapter = new AlbumAdapter(getContext(), objectDTOS.get(i).getItems());
-//                        System.out.println("Tên album: " + objectDTOS.get(i).getItems().get(0).getTitle());
-//                        RecyclerView recyclerView = recyclerViews.get(i);
-//                        System.out.println("check: " + String.valueOf(recyclerView != null));
-//                        if(recyclerView != null) {
-//                            recyclerView.setAdapter(albumAdapter);
-//                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-//                        }
-//                        TextView textView = textViews.get(i);
-//                        textView.setText(objectDTOS.get(i).getTitle());
-//                    }
                 }
                 linearLayoutLoadAPI.setVisibility(View.GONE);
             }
@@ -142,7 +102,7 @@ public class Top100Fragment extends Fragment {
                     @Override
                     public void onFailure(Call<ArrayList<ObjectDTO>> call, Throwable t) {
                         linearLayoutLoadAPI.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "API Error", Toast.LENGTH_LONG).show();
                     }
                 });
 //                Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
