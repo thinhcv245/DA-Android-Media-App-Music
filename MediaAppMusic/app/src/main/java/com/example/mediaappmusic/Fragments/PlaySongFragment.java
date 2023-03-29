@@ -15,13 +15,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.mediaappmusic.DTO.SongDTO;
+import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.R;
 import com.example.mediaappmusic.Services.MediaPlayerService;
 
 public class PlaySongFragment extends Fragment {
-
-    private static final String ARG_PARAMSONG = "paramSong";
-    private SongDTO song;
     MediaPlayerService mediaPlayerService;
 
     ImageView imageViewRotate, imageViewPlayOrPause;
@@ -33,11 +31,8 @@ public class PlaySongFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static PlaySongFragment newInstance(SongDTO song) {
+    public static PlaySongFragment newInstance() {
         PlaySongFragment fragment = new PlaySongFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAMSONG, song);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -45,7 +40,7 @@ public class PlaySongFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            song = (SongDTO) getArguments().get(ARG_PARAMSONG);
+
         }
     }
 
@@ -62,6 +57,11 @@ public class PlaySongFragment extends Fragment {
         seekBarSong             = layout.findViewById(R.id.playSongFragment_seekbar);
         textViewArtist          = layout.findViewById(R.id.playSongFragment_textView_artist);
         textViewTitleName       = layout.findViewById(R.id.playSongFragment_textView_titleMusic);
+
+        SongDTO songDTO = MediaPlayerService.getSongs().get(MediaPlayerService.getPosition());
+        imageViewRotate.setImageDrawable(Utilities.LoadImageFromWebOperations(songDTO.getThumbnailM()));
+        textViewArtist.setText(songDTO.getArtistsNames());
+        textViewTitleName.setText(songDTO.getTitle());
 
         mediaPlayerService = MediaPlayerService.getInstance();
 

@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 public class AlbumOrPlayListActivity extends AppCompatActivity {
 
-    CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     ImageView imageViewAlbum;
@@ -92,25 +91,5 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
             recyclerViewListSong.setAdapter(adapter);
             recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
         }
-//        IAPIData.iApiService.getDetailsAlbumOrPlayList(idAlbum).enqueue(new Callback<AlbumDTO>() {
-//            @Override
-//            public void onResponse(Call<AlbumDTO> call, Response<AlbumDTO> response) {
-//                if(response.isSuccessful()) {
-//                    AlbumDTO albumDTO = response.body();
-//
-//                    setValue(albumDTO.getTitle(), albumDTO.getThumbnail());
-//
-//                    SongAdapter adapter = new SongAdapter(AlbumOrPlayListActivity.this, albumDTO.getSong().getItems());
-//                    recyclerViewListSong.setAdapter(adapter);
-//                    recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AlbumDTO> call, Throwable t) {
-//                Toast.makeText(AlbumOrPlayListActivity.this, "API Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 }

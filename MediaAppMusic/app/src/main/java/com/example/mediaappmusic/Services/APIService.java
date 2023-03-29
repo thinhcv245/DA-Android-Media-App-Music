@@ -28,4 +28,5 @@ public class APIService {
     public String getPlayListTop100(){ return getRequest("top100"); }
     public String getDetailsAlbumOrPlayList(String id) { return getRequest("getDetailPlaylist/" + id); }
     public String getFullInfo(String id) { return getRequest("getFullInfo/" + id); }
+    public String getStreaming(String id) { return getRequest("getStreaming/" + id); }
 }

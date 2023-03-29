@@ -6,6 +6,16 @@
     android:orientation="vertical"
     tools:context=".Fragments.SongsFragment">
 
+    <TextView
+        android:text="Danh sách bài hát"
+        android:textColor="#aeaeae"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/songsFragment_recyclerView"
         android:layout_width="match_parent"

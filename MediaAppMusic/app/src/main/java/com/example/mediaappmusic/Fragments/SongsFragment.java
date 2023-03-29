@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.mediaappmusic.Adapters.SongAdapter;
 import com.example.mediaappmusic.DTO.SongDTO;
 import com.example.mediaappmusic.R;
+import com.example.mediaappmusic.Services.MediaPlayerService;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,7 @@ public class SongsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             songs = (ArrayList<SongDTO>) getArguments().getSerializable(ARG_PARAMSONGS);
+            MediaPlayerService.setSongs(songs);
         }
     }
 

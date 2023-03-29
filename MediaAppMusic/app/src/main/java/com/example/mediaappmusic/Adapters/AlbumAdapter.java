@@ -3,9 +3,11 @@ package com.example.mediaappmusic.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,9 +27,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     Context context;
     ArrayList<AlbumDTO> items;
 
+    FrameLayout frameLayoutLoading;
     public AlbumAdapter(Context context, ArrayList<AlbumDTO> items) {
         this.context = context;
         this.items = items;
+    }
+    public AlbumAdapter(Context context, ArrayList<AlbumDTO> items, FrameLayout loading) {
+        this.context = context;
+        this.items = items;
+        this.frameLayoutLoading = loading;
     }
 
     @NonNull

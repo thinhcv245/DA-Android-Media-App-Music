@@ -9,26 +9,6 @@
     android:orientation="vertical"
     tools:context=".Fragments.Top100Fragment">
 
-    <LinearLayout
-        android:id="@+id/top100Fragment_linearLayout_loadAPI"
-        android:elevation="10dp"
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ProgressBar
-            android:layout_gravity="center_horizontal"
-            android:indeterminateTint="@color/primary"
-            android:layout_width="60dp"
-            android:layout_height="60dp"/>
-        <TextView
-            android:text="Loading ..."
-            android:textColor="@color/primary"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
 <!--    <androidx.appcompat.widget.Toolbar-->
 <!--        android:id="@+id/top100Fragment_toolBar"-->
 <!--        android:layout_alignTop="@+id/top100Fragment_relativeLayout_parent"-->
@@ -61,4 +41,14 @@
 <!--        tools:ignore="NotSibling">-->
 
 <!--    </ScrollView>-->
+    <FrameLayout
+        android:id="@+id/top100Fragment_frameLayout_loading"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <fragment
+            class="com.example.mediaappmusic.Fragments.LoadingFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 </RelativeLayout>

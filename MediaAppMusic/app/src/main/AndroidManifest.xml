@@ -41,18 +41,9 @@
             android:exported="true"
             android:label="Media App Music"></activity>
         <activity
-            android:name=".PlayListActivity"
-            android:exported="true" />
-        <activity
-            android:name=".PlayMusicActivity"
-            android:exported="true" />
-        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".PersonalActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

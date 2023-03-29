@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mediaappmusic.DTO.SongDTO;
+import com.example.mediaappmusic.DTO.StreamSongDTO;
 import com.example.mediaappmusic.R;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 public class MediaPlayerService {
     private static ArrayList<SongDTO> songs;
+    private static Gson gson = new Gson();
     private static int position = 0;
 
     private static MediaPlayer mediaPlayer;
@@ -35,10 +38,6 @@ public class MediaPlayerService {
     public static MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
-
-//    public static void setMediaPlayer(MediaPlayer mediaPlayer) {
-//        MediaPlayerService.mediaPlayer = mediaPlayer;
-//    }
 
     public static ArrayList<SongDTO> getSongs() {
         return songs;
@@ -66,18 +65,26 @@ public class MediaPlayerService {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             if(songs != null) {
-                mediaPlayer.reset();
-                mediaPlayer.setDataSource("https://mp3-s1-zmp3.zmdcdn.me/30849dddcb9c22c27b8d/7013518746570810032?authen=exp=1680233664~acl=/30849dddcb9c22c27b8d/*~hmac=f0b06f04d8c1f461f760c2994696f483&fs=MTY4MDA2MDg2NDA2M3x3ZWJWNnwwfDU0LjI1NC4xNjIdUngMTM4");
-                mediaPlayer.prepareAsync();
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        setTimeTotal(seekBarSong, textViewEndTime);
-                        imageViewRotate.startAnimation(rotateAnimation);
-                        mp.start();
-                    }
-                });
-                updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate);
+                StreamSongDTO stream = gson.fromJson(APIService.getInstance().getStreaming(songs.get(position).getEncodeId())
+                        , StreamSongDTO.class);
+                String url = stream.get_128();
+                if(url == null || url.contains("\"err\"")) {
+                    Toast.makeText(imageViewPlayOrPause.getContext(), "Bài hát đang lỗi", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    mediaPlayer.reset();
+                    mediaPlayer.setDataSource(url);
+                    mediaPlayer.prepareAsync();
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            setTimeTotal(seekBarSong, textViewEndTime);
+                            imageViewRotate.startAnimation(rotateAnimation);
+                            mp.start();
+                        }
+                    });
+                    updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate);
+                }
             }
         } catch (IOException e) {
             Toast.makeText(context, "Bạn không cấp quyền nên không thể thực hiện.", Toast.LENGTH_SHORT).show();

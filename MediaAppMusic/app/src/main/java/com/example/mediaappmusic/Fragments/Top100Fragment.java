@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import retrofit2.Response;
 public class Top100Fragment extends Fragment {
     ImageView imageViewBanner;
     LinearLayout linearLayoutLoadAPI;
+    FrameLayout frameLayoutLoading;
     ArrayList<ObjectDTO> objectDTOS;
     RecyclerView recyclerViewObjectDTO;
     Gson gson = new Gson();
@@ -64,8 +68,8 @@ public class Top100Fragment extends Fragment {
 
         imageViewBanner         = layout.findViewById(R.id.top100Fragment_imageView_banner);
         recyclerViewObjectDTO   = layout.findViewById(R.id.top100Fragment_recyclerView);
-        linearLayoutLoadAPI     = layout.findViewById(R.id.top100Fragment_linearLayout_loadAPI);
-        linearLayoutLoadAPI.setVisibility(View.GONE);
+        frameLayoutLoading      = layout.findViewById(R.id.top100Fragment_frameLayout_loading);
+        frameLayoutLoading.setVisibility(View.GONE);
 
         Drawable drawable = Utilities.LoadImageFromAssets(getContext(), "banner.jpg");
         if(drawable != null) {
@@ -76,12 +80,12 @@ public class Top100Fragment extends Fragment {
     }
 
     private void pushDataToView(ArrayList<ObjectDTO> objectDTOS) {
-        ObjectDTOAdapter objectDTOAdapter = new ObjectDTOAdapter(getContext(), objectDTOS);
+        ObjectDTOAdapter objectDTOAdapter = new ObjectDTOAdapter(getContext(), objectDTOS, frameLayoutLoading);
         recyclerViewObjectDTO.setAdapter(objectDTOAdapter);
         recyclerViewObjectDTO.setLayoutManager(new LinearLayoutManager(getContext()));
     }
     private void CallPlayListTop100() {
-        linearLayoutLoadAPI.setVisibility(View.VISIBLE);
+        frameLayoutLoading.setVisibility(View.VISIBLE);
         String api = APIService.getInstance().getPlayListTop100();
         try{
             if(!api.contains("err")) {
@@ -95,6 +99,6 @@ public class Top100Fragment extends Fragment {
         catch (Exception e) {
             Log.e("Error call API: ", e.getMessage());
         }
-        linearLayoutLoadAPI.setVisibility(View.GONE);
+        frameLayoutLoading.setVisibility(View.GONE);
     }
 }

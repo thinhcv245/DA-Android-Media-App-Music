@@ -3,9 +3,11 @@ package com.example.mediaappmusic.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,9 +26,15 @@ public class ObjectDTOAdapter extends RecyclerView.Adapter<ObjectDTOAdapter.View
     Context context;
     ArrayList<ObjectDTO> objectDTOS;
 
+    FrameLayout frameLayoutLoading;
     public ObjectDTOAdapter(Context context, ArrayList<ObjectDTO> objectDTOS) {
         this.context = context;
         this.objectDTOS = objectDTOS;
+    }
+    public ObjectDTOAdapter(Context context, ArrayList<ObjectDTO> objectDTOS, FrameLayout loading) {
+        this.context = context;
+        this.objectDTOS = objectDTOS;
+        this.frameLayoutLoading = loading;
     }
 
     @NonNull
@@ -54,7 +62,6 @@ public class ObjectDTOAdapter extends RecyclerView.Adapter<ObjectDTOAdapter.View
                 bundle.putSerializable("objectDTO", objectDTO);
                 i.putExtras(bundle);
                 view.getContext().startActivity(i);
-
             }
         });
     }
