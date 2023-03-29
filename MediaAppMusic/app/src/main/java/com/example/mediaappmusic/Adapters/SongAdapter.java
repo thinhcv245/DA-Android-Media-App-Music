@@ -1,5 +1,6 @@
 package com.example.mediaappmusic.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediaappmusic.Activities.PlaySongActivity;
@@ -24,10 +28,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     Context context;
     ArrayList<SongDTO> items;
-
+    int idColor = R.color.black;
     public SongAdapter(Context context, ArrayList<SongDTO> items) {
         this.context = context;
         this.items = items;
+    }
+    public SongAdapter(Context context, ArrayList<SongDTO> items, @NonNull int idColor) {
+        this.context = context;
+        this.items = items;
+        this.idColor = idColor;
     }
 
     @NonNull
@@ -65,15 +74,19 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private String encodeId;
-        ImageView img;
+        ImageView img, threePointVerticle;
         TextView nameSong, nameSing;
         LinearLayout linearLayoutParent;
+        @SuppressLint("ResourceAsColor")
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img                     = itemView.findViewById(R.id.itemSong_imageView_img);
+            threePointVerticle      = itemView.findViewById(R.id.itemSong_imageView_iconThreePointVertical);
             nameSong                = itemView.findViewById(R.id.itemSong_textView_nameSong);
             nameSing                = itemView.findViewById(R.id.itemSong_textView_nameSing);
             linearLayoutParent      = itemView.findViewById(R.id.itemSong_linearLayout_parent);
+            nameSong.setTextColor(context.getColor(idColor));
+            threePointVerticle.setColorFilter(context.getColor(idColor));
         }
 
     }

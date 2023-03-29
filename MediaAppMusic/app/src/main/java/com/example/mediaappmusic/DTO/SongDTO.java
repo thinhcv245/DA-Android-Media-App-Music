@@ -15,6 +15,7 @@ public class SongDTO implements Serializable {
     private ArrayList<ArtistDTO> artists;
     private StreamSongDTO streaming;
 
+    public SongDTO() {}
     public SongDTO(String encodeId, String title, String artistsNames, String thumbnailM, ArrayList<ArtistDTO> artists, StreamSongDTO streaming) {
         this.encodeId = encodeId;
         this.title = title;

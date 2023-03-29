@@ -17,6 +17,7 @@ import com.example.mediaappmusic.Activities.AlbumOrPlayListActivity;
 import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.DTO.AlbumDTO;
 import com.example.mediaappmusic.R;
+import com.example.mediaappmusic.Services.MediaPlayerService;
 
 import java.util.ArrayList;
 

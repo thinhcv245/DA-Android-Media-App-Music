@@ -21,7 +21,10 @@ import com.example.mediaappmusic.DTO.AlbumDTO;
 import com.example.mediaappmusic.DTO.SongDTO;
 import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.R;
+import com.example.mediaappmusic.Services.APIService;
+import com.example.mediaappmusic.Services.MediaPlayerService;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,9 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
     ImageView imageViewAlbum;
     RecyclerView recyclerViewListSong;
     String idAlbum;
+
+    AlbumDTO albumDTO;
+    Gson gson = new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,25 +81,36 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
 
 
     private void callGetDetails() {
-        IAPIData.iApiService.getDetailsAlbumOrPlayList(idAlbum).enqueue(new Callback<AlbumDTO>() {
-            @Override
-            public void onResponse(Call<AlbumDTO> call, Response<AlbumDTO> response) {
-                if(response.isSuccessful()) {
-                    AlbumDTO albumDTO = response.body();
+        String callAPI = APIService.getInstance().getDetailsAlbumOrPlayList(idAlbum);
+        if(!callAPI.contains("\"err\"")) {
+            albumDTO = gson.fromJson(callAPI, AlbumDTO.class);
+            MediaPlayerService.setSongs(albumDTO.getSong().getItems());
 
-                    setValue(albumDTO.getTitle(), albumDTO.getThumbnail());
+            setValue(albumDTO.getTitle(), albumDTO.getThumbnail());
 
-                    SongAdapter adapter = new SongAdapter(AlbumOrPlayListActivity.this, albumDTO.getSong().getItems());
-                    recyclerViewListSong.setAdapter(adapter);
-                    recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AlbumDTO> call, Throwable t) {
-                Toast.makeText(AlbumOrPlayListActivity.this, "API Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+            SongAdapter adapter = new SongAdapter(AlbumOrPlayListActivity.this, albumDTO.getSong().getItems());
+            recyclerViewListSong.setAdapter(adapter);
+            recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
+        }
+//        IAPIData.iApiService.getDetailsAlbumOrPlayList(idAlbum).enqueue(new Callback<AlbumDTO>() {
+//            @Override
+//            public void onResponse(Call<AlbumDTO> call, Response<AlbumDTO> response) {
+//                if(response.isSuccessful()) {
+//                    AlbumDTO albumDTO = response.body();
+//
+//                    setValue(albumDTO.getTitle(), albumDTO.getThumbnail());
+//
+//                    SongAdapter adapter = new SongAdapter(AlbumOrPlayListActivity.this, albumDTO.getSong().getItems());
+//                    recyclerViewListSong.setAdapter(adapter);
+//                    recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<AlbumDTO> call, Throwable t) {
+//                Toast.makeText(AlbumOrPlayListActivity.this, "API Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }

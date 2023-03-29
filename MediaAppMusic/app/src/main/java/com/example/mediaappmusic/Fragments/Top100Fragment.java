@@ -21,9 +21,13 @@ import android.widget.Toast;
 import com.example.mediaappmusic.APIs.IAPIData;
 import com.example.mediaappmusic.Adapters.AlbumAdapter;
 import com.example.mediaappmusic.Adapters.ObjectDTOAdapter;
+import com.example.mediaappmusic.DTO.AlbumDTO;
 import com.example.mediaappmusic.DTO.ObjectDTO;
 import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.R;
+import com.example.mediaappmusic.Services.APIService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -36,6 +40,7 @@ public class Top100Fragment extends Fragment {
     LinearLayout linearLayoutLoadAPI;
     ArrayList<ObjectDTO> objectDTOS;
     RecyclerView recyclerViewObjectDTO;
+    Gson gson = new Gson();
     public Top100Fragment() {
         // Required empty public constructor
     }
@@ -66,7 +71,6 @@ public class Top100Fragment extends Fragment {
         if(drawable != null) {
             imageViewBanner.setImageDrawable(drawable);
         }
-
         CallPlayListTop100();
         return layout;
     }
@@ -78,35 +82,19 @@ public class Top100Fragment extends Fragment {
     }
     private void CallPlayListTop100() {
         linearLayoutLoadAPI.setVisibility(View.VISIBLE);
-        IAPIData.iApiService.getPlayListTop100().enqueue(new Callback<ArrayList<ObjectDTO>>() {
-            @Override
-            public void onResponse(Call<ArrayList<ObjectDTO>> call, Response<ArrayList<ObjectDTO>> response) {
-                if (response.isSuccessful()) {
-                    objectDTOS = response.body();
-                    pushDataToView(objectDTOS);
-                }
-                linearLayoutLoadAPI.setVisibility(View.GONE);
+        String api = APIService.getInstance().getPlayListTop100();
+        try{
+            if(!api.contains("err")) {
+                objectDTOS = gson.fromJson(api, new TypeToken<ArrayList<ObjectDTO>>(){}.getType());
+                pushDataToView(objectDTOS);
             }
-            @Override
-            public void onFailure(Call<ArrayList<ObjectDTO>> call, Throwable t) {
-                IAPIData.iApiService.getPlayListTop100().enqueue(new Callback<ArrayList<ObjectDTO>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<ObjectDTO>> call, Response<ArrayList<ObjectDTO>> response) {
-                        if (response.isSuccessful()) {
-                            objectDTOS = response.body();
-                            pushDataToView(objectDTOS);
-                        }
-                        linearLayoutLoadAPI.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<ObjectDTO>> call, Throwable t) {
-                        linearLayoutLoadAPI.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "API Error", Toast.LENGTH_LONG).show();
-                    }
-                });
-//                Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
+            else {
+                Toast.makeText(getContext(), "Call API Error", Toast.LENGTH_LONG).show();
             }
-        });
+        }
+        catch (Exception e) {
+            Log.e("Error call API: ", e.getMessage());
+        }
+        linearLayoutLoadAPI.setVisibility(View.GONE);
     }
 }
