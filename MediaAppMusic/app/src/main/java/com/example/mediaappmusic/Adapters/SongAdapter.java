@@ -3,8 +3,6 @@ package com.example.mediaappmusic.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mediaappmusic.Activities.PlaySongActivity;
 import com.example.mediaappmusic.DTO.SongDTO;
-import com.example.mediaappmusic.Fragments.PlaySongFragment;
 import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.R;
 import com.example.mediaappmusic.Services.MediaPlayerService;
 
 import java.util.ArrayList;
-
-import pl.droidsonroids.gif.GifImageView;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
@@ -75,7 +66,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 MediaPlayerService.setPosition(pos);
                 Intent i = new Intent(context, PlaySongActivity.class);
                 context.startActivity(i);
-                ((AppCompatActivity)context).finish();
+                AppCompatActivity activity = ((AppCompatActivity)context);
+                activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                activity.finish();
             }
         });
     }

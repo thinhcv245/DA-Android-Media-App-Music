@@ -22,6 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MediaPlayerService {
+
+    private static boolean pause = false;
+
     private static ArrayList<SongDTO> songs;
     private static Gson gson = new Gson();
     private static int position = 0;
@@ -83,7 +86,7 @@ public class MediaPlayerService {
                             mp.start();
                         }
                     });
-                    updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate);
+                    updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate, rotateAnimation);
                 }
             }
         } catch (IOException e) {
@@ -95,11 +98,16 @@ public class MediaPlayerService {
         textViewEndTime.setText(hourseFormat.format(mediaPlayer.getDuration()));
         seekBarSong.setMax(mediaPlayer.getDuration());
     }
-    public void updateTimeStart(SeekBar seekBarSong, TextView textViewStartTime, ImageView imageViewPlayOrPause, ImageView imageViewRotate ) {
+    public void updateTimeStart(SeekBar seekBarSong, TextView textViewStartTime, ImageView imageViewPlayOrPause, ImageView imageViewRotate, Animation rotateAnimation) {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(!pause) {
+                    if(!mediaPlayer.isPlaying()){
+                        playSong(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate, rotateAnimation);
+                    }
+                }
                 SimpleDateFormat hourseFormat = new SimpleDateFormat("mm:ss");
                 textViewStartTime.setText(hourseFormat.format(mediaPlayer.getCurrentPosition()));
                 seekBarSong.setProgress(mediaPlayer.getCurrentPosition());
@@ -114,12 +122,19 @@ public class MediaPlayerService {
         },500);
     }
     public void playSong(SeekBar seekBarSong, TextView textViewStartTime, ImageView imageViewPlayOrPause, ImageView imageViewRotate, Animation rotateAnimation) {
-        imageViewPlayOrPause.setImageResource(R.drawable.icon_play);
-        imageViewRotate.startAnimation(rotateAnimation);
-        mediaPlayer.start();
-        updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate);
+        if(mediaPlayer != null && mediaPlayer.getDuration() > 0){
+            pause = false;
+            imageViewPlayOrPause.setImageResource(R.drawable.icon_play);
+            imageViewRotate.startAnimation(rotateAnimation);
+            mediaPlayer.start();
+            updateTimeStart(seekBarSong, textViewStartTime, imageViewPlayOrPause, imageViewRotate, rotateAnimation);
+        }
+        else {
+            pauseSong(imageViewPlayOrPause, imageViewRotate);
+        }
     }
     public void pauseSong(ImageView imageViewPlayOrPause, ImageView imageViewRotate) {
+        pause = true;
         imageViewPlayOrPause.setImageResource(R.drawable.icon_pause);
         imageViewRotate.clearAnimation();
         mediaPlayer.pause();
