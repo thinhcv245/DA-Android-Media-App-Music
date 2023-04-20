@@ -3,41 +3,36 @@ package com.example.mediaappmusic.Activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.mediaappmusic.APIs.IAPIData;
 import com.example.mediaappmusic.Adapters.SongAdapter;
 import com.example.mediaappmusic.DTO.AlbumDTO;
-import com.example.mediaappmusic.DTO.SongDTO;
+import com.example.mediaappmusic.DTO.ObjectDTO;
 import com.example.mediaappmusic.Helpers.Utilities;
 import com.example.mediaappmusic.R;
-import com.example.mediaappmusic.Services.APIService;
+import com.example.mediaappmusic.Services.APIServiceZingmp3;
 import com.example.mediaappmusic.Services.MediaPlayerService;
+import com.example.mediaappmusic.Services.ServiceBackground;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.ArrayList;
 
 public class AlbumOrPlayListActivity extends AppCompatActivity {
-
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     ImageView imageViewAlbum;
     RecyclerView recyclerViewListSong;
     String idAlbum;
-
+    //String nameObjectDTO;
     AlbumDTO albumDTO;
     Gson gson = new Gson();
     @Override
@@ -47,6 +42,8 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
         idAlbum = (String) bundle.get("IDAlbum");
+        Log.d("idAlbum", idAlbum);
+        //nameObjectDTO = (String) bundle.get("nameObjectDTO");
 
         toolbar                     = findViewById(R.id.albumOrPlayList_toolBar);
         imageViewAlbum              = findViewById(R.id.albumOrPlayList_imageView_album);
@@ -80,9 +77,9 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
 
 
     private void callGetDetails() {
-        String callAPI = APIService.getInstance().getDetailsAlbumOrPlayList(idAlbum);
-        if(!callAPI.contains("\"err\"")) {
-            albumDTO = gson.fromJson(callAPI, AlbumDTO.class);
+        albumDTO = ServiceBackground.getAlbum(idAlbum);
+
+        if(albumDTO != null) {
             MediaPlayerService.setSongs(albumDTO.getSong().getItems());
 
             setValue(albumDTO.getTitle(), albumDTO.getThumbnail());
@@ -90,6 +87,9 @@ public class AlbumOrPlayListActivity extends AppCompatActivity {
             SongAdapter adapter = new SongAdapter(AlbumOrPlayListActivity.this, albumDTO.getSong().getItems());
             recyclerViewListSong.setAdapter(adapter);
             recyclerViewListSong.setLayoutManager(new LinearLayoutManager(AlbumOrPlayListActivity.this));
+        }
+        else {
+            Toast.makeText(this, "Load data error", Toast.LENGTH_LONG).show();
         }
     }
 }

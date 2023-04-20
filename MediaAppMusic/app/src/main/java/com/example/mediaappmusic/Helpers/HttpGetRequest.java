@@ -21,8 +21,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             //Create a URL object holding our url
             URL myUrl = new URL(stringUrl);
             //Create a connection
-            HttpURLConnection connection =(HttpURLConnection)
-                    myUrl.openConnection();
+            HttpURLConnection connection =(HttpURLConnection)myUrl.openConnection();
             //Set methods and timeouts
             connection.setRequestMethod(REQUEST_METHOD);
             connection.setReadTimeout(READ_TIMEOUT);
@@ -31,8 +30,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             //Connect to our url
             connection.connect();
             //Create a new InputStreamReader
-            InputStreamReader streamReader = new
-                    InputStreamReader(connection.getInputStream());
+            InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
             //Create a new buffered reader and String Builder
             BufferedReader reader = new BufferedReader(streamReader);
             StringBuilder stringBuilder = new StringBuilder();

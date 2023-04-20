@@ -50,6 +50,7 @@ public class SongsFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_songs, container, false);
         RecyclerView recyclerView = layout.findViewById(R.id.songsFragment_recyclerView);
         SongAdapter adapter = new SongAdapter(getContext(), songs, R.color.white);
+        MediaPlayerService.setSongAdapter(adapter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return layout;

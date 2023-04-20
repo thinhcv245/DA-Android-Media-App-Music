@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".Activities.LoginActivity">
     <ImageView
         android:id="@+id/login_imageView_bgHead"
         app:layout_constraintHeight_percent=".4"
@@ -29,10 +29,12 @@
 
     <EditText
         android:id="@+id/login_editText_username"
-        android:drawableLeft="@drawable/icon_email"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawableTint="@color/blue"
         android:drawablePadding="15dp"
         app:layout_constraintWidth_percent=".8"
         android:layout_width="0dp"
+        android:maxLength="100"
         android:layout_height="wrap_content"
         android:background="@drawable/blue_border_rounded_cornwe"
         android:fontFamily="@font/poppins_regular"
@@ -41,6 +43,7 @@
         android:maxLines="1"
         android:layout_marginTop="98.7dp"
         android:paddingLeft="17dp"
+        android:paddingRight="17dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:textCursorDrawable="@drawable/cursor_color"
@@ -52,22 +55,25 @@
         app:layout_constraintVertical_chainStyle="packed"/>
     <EditText
         android:id="@+id/login_editText_password"
-        android:drawableLeft="@drawable/icon_password"
+        android:drawableLeft="@drawable/baseline_key_24"
+        android:drawableTint="@color/blue"
         android:drawablePadding="15dp"
         app:layout_constraintWidth_percent=".8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/blue_border_rounded_cornwe"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Password"
-        android:inputType="textEmailAddress"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:layout_marginTop="18.7dp"
         android:paddingLeft="17dp"
+        android:paddingRight="17dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:textCursorDrawable="@drawable/cursor_color"
         android:textSize="12sp"
+        android:maxLength="15"
         app:layout_constraintTop_toBottomOf="@id/login_editText_username"
         app:layout_constraintBottom_toTopOf="@id/login_textView_login"
         app:layout_constraintLeft_toLeftOf="@id/login_editText_username"
@@ -82,85 +88,62 @@
         android:fontFamily="@font/poppins_medium"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
-        android:text="Login"
+        android:text="Đăng Nhập"
         android:textColor="#ffffff"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/login_editText_password"
-        app:layout_constraintBottom_toTopOf="@id/login_textView_forgotpassword"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/login_editText_password"
         app:layout_constraintRight_toRightOf="@id/login_editText_password"/>
-    <TextView
-        android:id="@+id/login_textView_forgotpassword"
-        android:text="FORGOT PASSWORD ?"
-        android:layout_gravity="center"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="#1566e0"
-        android:textSize="10.5sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_textView_login"
-        app:layout_constraintLeft_toLeftOf="@id/login_textView_login"
-        app:layout_constraintRight_toRightOf="@id/login_textView_login"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/g8"
+    <LinearLayout
+        android:weightSum="1"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/login_textView_Or"
-        android:text="or"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="13.3dp"
-        android:textColor="#aeaeae"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/g8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-    <ImageView
-        android:id="@+id/login_imageView_iconFB"
-        android:src="@drawable/fb"
-        android:layout_width="26.7dp"
-        android:layout_height="26.7dp"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@id/login_textView_Or"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/login_imageView_iconInstagram"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-        android:id="@+id/login_imageView_iconInstagram"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/instagram"
-        android:layout_width="26.7dp"
-        android:layout_height="26.7dp"
-        app:layout_constraintLeft_toRightOf="@id/login_imageView_iconFB"
-        app:layout_constraintTop_toBottomOf="@id/login_textView_Or"
-        app:layout_constraintRight_toLeftOf="@id/login_imageView_iconTwitter"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-        android:id="@+id/login_imageView_iconTwitter"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/twitter"
-        android:layout_width="26.7dp"
-        android:layout_height="26.7dp"
-        app:layout_constraintLeft_toRightOf="@id/login_imageView_iconInstagram"
-        app:layout_constraintTop_toBottomOf="@id/login_textView_Or"
-        app:layout_constraintRight_toLeftOf="@id/login_imageView_iconLinkedin"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-        android:id="@+id/login_imageView_iconLinkedin"
-        android:src="@drawable/linkedin"
-        android:layout_width="26.7dp"
-        android:layout_height="26.7dp"
-        app:layout_constraintLeft_toRightOf="@id/login_imageView_iconTwitter"
-        app:layout_constraintTop_toBottomOf="@id/login_textView_Or"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/login_textView_login">
+        <Space
+            android:layout_weight=".7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/login_textView_register"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Đăng ký ngay"
+            android:textColor="#1566e0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/login_textView_Or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="hoặc"
+            android:textColor="#aeaeae"
+            android:textSize="13.3dp"/>
+
+        <TextView
+            android:id="@+id/login_textView_forgotpassword"
+            android:text="Quên mật khẩu?"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="#1566e0"
+            android:textSize="10.5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,6 @@
     <color name="primary">#5D7B6F</color>
     <color name="grey">#FFAAAAAA</color>
     <color name="white">#FFFFFF</color>
+    <color name="blue">#1566e0</color>
+    <color name="active">#CE30F1</color>
 </resources>
